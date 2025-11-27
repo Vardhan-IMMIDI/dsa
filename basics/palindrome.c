@@ -14,10 +14,10 @@ int main (void)
 
     if (rev == n)
     {
-        printf("Palindrome!");
+        printf("Palindrome!\n");
     }
     else
     {
-        printf("Not Palindrome");
+        printf("Not Palindrome\n");
     }
 }
