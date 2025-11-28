@@ -1,18 +1,29 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#define and &&
+#define or ||
+
 
 void display (int arr[], int n);
+int max (int arr[], int n);
+int min (int arr[], int n);
+int sum (int arr[], int n);
+int avg (int arr[], int n);
+bool linear_search (int arr[], int n, int key);
+bool binary_search (int arr[], int n, int key);
+void rev (int arr[], int n);
 void rotate (int arr[], int n, int by);
-
+int* merge (int a[], int m, int b[], int n);
 
 int main (void)
 {
-    int arr[] = {1, 2, 3, 4, 5};
-    display(arr, 5);
-    rotate(arr, 5, -3);
-    display(arr, 5);
-    rotate(arr, 5, 3);
-    display(arr, 5);
+    int a[] = {1, 2, 3, 9, 75, 98, 122, 150};
+    int b[] = {3, 7, 45, 59, 63, 85};
+    int* c = merge(a, 8, b, 6);
+    display(c, 14);
+
+
     
 }
 
@@ -142,4 +153,40 @@ void rotate (int arr[], int n, int by)
         }
         arr[i] = temp[index];
     }
+}
+
+int* merge (int a[], int m, int b[], int n)
+{
+    int i = 0, j = 0;
+    int* arr = (int *)malloc((m + n) * sizeof(int));
+    int k = 0;
+    while(i < m and j < n)
+    {
+        if (a[i] < b[j])
+        {
+            arr[k] = a[i];
+            i++;
+        }
+        else
+        {
+            arr[k] = b[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i < m)
+    {
+        arr[k] = a[i];
+        i++;
+        k++;
+    }
+
+    while (j < n)
+    {
+        arr[k] = b[j];
+        j++;
+        k++;
+    }
+    return arr;
 }
