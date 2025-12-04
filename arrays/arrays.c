@@ -14,17 +14,16 @@ bool linear_search (int arr[], int n, int key);
 bool binary_search (int arr[], int n, int key);
 void rev (int arr[], int n);
 void rotate (int arr[], int n, int by);
-int* merge (int a[], int m, int b[], int n);
+int* merge (int a[], int m, int b[], int n, int *new);
+int* rm_duplicates (int arr[], int n);
 
 int main (void)
 {
-    int a[] = {1, 2, 3, 9, 75, 98, 122, 150};
-    int b[] = {3, 7, 45, 59, 63, 85};
-    int* c = merge(a, 8, b, 6);
-    display(c, 14);
+    int arr[] = {68, 3, 9, 9, 4, 6};
+    int* new = rm_duplicates(arr, 6);
+    int n = sizeof(new) / sizeof(new[0]);
+    display(new, n);
 
-
-    
 }
 
 void display (int arr[], int n)
@@ -189,4 +188,35 @@ int* merge (int a[], int m, int b[], int n)
         k++;
     }
     return arr;
+}
+
+int* rm_duplicates (int arr[], int n)
+{
+    int temp[n];
+    int index = -1;
+    for (int i = 0; i < n; i++)
+    {
+        bool flag = true;
+        for (int j = 0; j <= index; j++)
+        {
+            if (arr[i] == temp[j])
+            {
+                flag = false;
+                break;
+            }
+
+        }
+        if (flag == true)
+        {
+            index += 1;
+            temp[index] = arr[i];
+        }
+    }
+    int* new = (int*) malloc(sizeof(int) * index + 1);
+    for (int i = 0; i <= index; i++)
+    {
+        new[i] = temp[i];
+    }
+
+    return new;
 }
